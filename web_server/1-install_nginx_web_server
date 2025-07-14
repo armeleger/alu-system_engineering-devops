@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
-# Installs nginx and sets custom homepage content
+# Installs nginx and sets a custom homepage with 'Holberton School'
 
 apt-get update -y
 apt-get install nginx -y
 
-echo 'Holberton School for the win!' > /var/www/html/index.nginx-debian.html
+# Set the custom homepage content
+echo 'Holberton School' > /var/www/html/index.html
 
+# Remove default nginx index if it exists (to avoid conflict)
+rm -f /var/www/html/index.nginx-debian.html
+
+# Start Nginx using service (no systemctl)
 service nginx start
