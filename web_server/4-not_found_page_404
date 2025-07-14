@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Sets up a custom 404 page with French message
+
+apt-get update -y
+apt-get install nginx -y
+
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+
+sed -i '/location \/ {/a \ \n    error_page 404 \/custom_404.html;\n    location = \/custom_404.html {\n        internal;\n    }' /etc/nginx/sites-available/default
+
+service nginx restart
