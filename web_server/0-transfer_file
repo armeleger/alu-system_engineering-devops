@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# Transfers a file to a remote server using scp
+# Transfers a file to a remote server using scp with SSH key authentication
 
-if [ "$#" -lt 4 ]; then
+if [ "$#" -ne 4 ]; then
   echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
   exit 1
 fi
 
-FILE=$1
-IP=$2
-USER=$3
-KEY=$4
+FILE="$1"
+IP="$2"
+USER="$3"
+KEY="$4"
 
-scp -o StrictHostKeyChecking=no -i "$KEY" "$FILE" "$USER@$IP:~/"
+# Perform secure copy with no strict host checking
+scp -i "$KEY" -o StrictHostKeyChecking=no "$FILE" "$USER@$IP:~/"
+
+# Exit with the appropriate status
+exit $?
