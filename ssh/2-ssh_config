@@ -1,0 +1,5 @@
+Host myserver
+    HostName 102.68.120.17
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    IdentitiesOnly yes
